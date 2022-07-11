@@ -13,7 +13,11 @@ public class CryptocurrencyService {
 
     private final CryptocurrencyRepository cryptocurrencyRepository;
 
-    public List<Cryptocurrency> getCryptocurrency() {
+    public List<Cryptocurrency> getCryptocurrencies() {
         return cryptocurrencyRepository.findAll();
+    }
+
+    public Float getPrice(String symbol){
+        return cryptocurrencyRepository.findBySymbol(symbol).getPriceUsd();
     }
 }
