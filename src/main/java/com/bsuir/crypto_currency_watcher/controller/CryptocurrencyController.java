@@ -17,5 +17,8 @@ public class CryptocurrencyController {
 
     private final CryptocurrencyService cryptocurrencyService;
 
-
+    @GetMapping
+    public ResponseEntity<List<Cryptocurrency>> getCryptocurrency() {
+        return ResponseEntity.ok().body(cryptocurrencyService.getCryptocurrency());
+    }
 }
