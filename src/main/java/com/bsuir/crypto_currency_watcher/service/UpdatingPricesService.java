@@ -1,26 +1,33 @@
 package com.bsuir.crypto_currency_watcher.service;
 
 import com.bsuir.crypto_currency_watcher.dto.CryptocurrencyDTO;
+import com.bsuir.crypto_currency_watcher.repository.CryptocurrencyRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@AllArgsConstructor
 public class UpdatingPricesService {
 
-    private static final String URL = "https://api.coinlore.net/api/ticker/?id=";
-    private static final String BITCOIN_ID = "90";
-    private static final String ETHEREUM_ID = "80";
-    private static final String SOLANA_ID = "48543";
+    private final CryptocurrencyRepository cryptocurrencyRepository;
 
-    @Scheduled(fixedDelayString = "4000")
+    private static final String URL = "https://api.coinlore.net/api/ticker/?id=";
+    private static final long[] ID_ARRAY_OF_CRYPTOCURRENCY = {90, 80, 48543};
+
+    @Scheduled(fixedDelayString = "60000")
+    @Transactional
     public void updatePrices(){
         RestTemplate restTemplate = new RestTemplate();
-        CryptocurrencyDTO[] cryptocurrency = restTemplate.getForObject(URL + BITCOIN_ID, CryptocurrencyDTO[].class);
-        System.out.println("B " + cryptocurrency[0].getPrice_usd());
-        cryptocurrency = restTemplate.getForObject(URL + ETHEREUM_ID, CryptocurrencyDTO[].class);
-        System.out.println("E " + cryptocurrency[0].getPrice_usd());
-        cryptocurrency = restTemplate.getForObject(URL + SOLANA_ID, CryptocurrencyDTO[].class);
-        System.out.println("S " + cryptocurrency[0].getPrice_usd());
+        ResponseEntity<CryptocurrencyDTO[]> response;
+
+        for (int i = 0; i < 3; i ++){
+            response = restTemplate.getForEntity(URL + ID_ARRAY_OF_CRYPTOCURRENCY[i], CryptocurrencyDTO[].class);
+            System.out.println(response.getBody()[0].getPrice_usd());
+            cryptocurrencyRepository.updatePrice(response.getBody()[0].getPrice_usd(), ID_ARRAY_OF_CRYPTOCURRENCY[i]);
+        }
     }
 }
