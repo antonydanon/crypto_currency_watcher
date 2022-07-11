@@ -21,4 +21,5 @@ public class CryptocurrencyController {
     public ResponseEntity<List<Cryptocurrency>> getCryptocurrency() {
         return ResponseEntity.ok().body(cryptocurrencyService.getCryptocurrency());
     }
+
 }
