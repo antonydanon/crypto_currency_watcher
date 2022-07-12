@@ -1,9 +1,7 @@
 package com.bsuir.crypto_currency_watcher.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -13,6 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @AllArgsConstructor
 public class Watcher {
     @Id
@@ -29,5 +28,6 @@ public class Watcher {
             joinColumns = @JoinColumn(name = "watcher_id"),
             inverseJoinColumns = @JoinColumn(name = "cryptocurrency_id")
     )
+    @JsonManagedReference
     private Set<Cryptocurrency> cryptocurrencies;
 }

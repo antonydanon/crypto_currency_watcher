@@ -1,6 +1,8 @@
 package com.bsuir.crypto_currency_watcher.model;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import java.util.Set;
@@ -23,5 +25,6 @@ public class Cryptocurrency {
     private float priceUsd;
 
     @ManyToMany(mappedBy = "cryptocurrencies")
+    @JsonBackReference
     private Set<Watcher> users;
 }

@@ -20,4 +20,8 @@ public class CryptocurrencyService {
     public Float getPrice(String symbol){
         return cryptocurrencyRepository.findBySymbol(symbol).getPriceUsd();
     }
+
+    public Cryptocurrency getCryptocurrencyBySymbol(String symbol){
+        return cryptocurrencyRepository.findBySymbol(symbol);
+    }
 }
