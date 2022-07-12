@@ -1,0 +1,17 @@
+.banner{
+
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.4),
+            rgba(0, 0, 0, 0.4)
+    ), url("https://i.pinimg.com/originals/b9/8f/a5/b98fa56ef5407f6c1f64cae02ec04bb1.jpg") center;
+    padding: 0;
+    text-align: center;
+    height: 450px;
+
+}
+
+.title{
+    font-size: 5rem;
+    color: white;
+    padding-top: 10%;
+}
