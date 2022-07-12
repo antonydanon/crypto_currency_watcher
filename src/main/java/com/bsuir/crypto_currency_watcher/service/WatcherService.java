@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Service
@@ -29,6 +30,10 @@ public class WatcherService {
                 .priceAtRegistration(cryptocurrency.getPriceUsd())
                 .cryptocurrencies(cryptocurrencies)
                 .build();
+    }
+
+    public List<Watcher> getAllWatchers(){
+        return watcherRepository.findAll();
     }
 
 }
