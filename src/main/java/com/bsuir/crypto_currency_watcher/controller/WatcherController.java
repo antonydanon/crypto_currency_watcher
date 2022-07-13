@@ -15,7 +15,7 @@ public class WatcherController {
 
     private final WatcherService watcherService;
 
-    @PostMapping("/notify")
+    @PostMapping("/notification")
     public ResponseEntity<Watcher> notify(@RequestBody WatcherDTO watcherDTO) {
         return ResponseEntity.ok().body(watcherService.notify(watcherDTO));
     }

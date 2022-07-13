@@ -18,7 +18,7 @@ public class CryptocurrencyService {
         return cryptocurrencyRepository.findAll();
     }
 
-    public Float getPrice(String symbol){
+    public Float getCryptocurrencyPrice(String symbol){
         if(cryptocurrencyExistsBySymbol(symbol))
             return cryptocurrencyRepository.findBySymbol(symbol).getPriceUsd();
         else

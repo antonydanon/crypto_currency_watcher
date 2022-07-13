@@ -21,8 +21,8 @@ public class CryptocurrencyController {
         return ResponseEntity.ok().body(cryptocurrencyService.getCryptocurrencies());
     }
 
-    @GetMapping("/price/{symbol}")
-    public ResponseEntity<Float> getPrice(@PathVariable String symbol) {
-        return ResponseEntity.ok().body(cryptocurrencyService.getPrice(symbol));
+    @GetMapping("/price")
+    public ResponseEntity<Float> getCryptocurrencyPrice(@RequestParam String symbol) {
+        return ResponseEntity.ok().body(cryptocurrencyService.getCryptocurrencyPrice(symbol));
     }
 }

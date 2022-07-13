@@ -9,7 +9,7 @@ function NotifyForm(){
     let cryptocurrencySymbol = React.createRef();
     let username = React.createRef();
 
-    const API_URL  = "http://localhost:8080/watchers/notify";
+    const API_URL  = "http://localhost:8080/watchers/notification";
 
     const notify = (cryptocurrencySymbol, username) => {
         axios

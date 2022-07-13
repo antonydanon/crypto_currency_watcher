@@ -6,12 +6,16 @@ function Form(){
 
     let cryptocurrencySymbol = React.createRef();
 
-    const API_URL  = "http://localhost:8080/cryptocurrencies/price/";
+    const API_URL  = "http://localhost:8080/cryptocurrencies/price";
 
     const[cryptocurrencyPrice, setCryptocurrencyPrice] = React.useState("");
 
     const getCryptocurrencyPrice = () => {
-        axios.get(API_URL + cryptocurrencySymbol.current.value)
+        axios.get(API_URL,{
+            params: {
+                symbol: cryptocurrencySymbol.current.value
+            }
+        })
             .then((response) => {
                 setCryptocurrencyPrice(response.data+"$");
             })
