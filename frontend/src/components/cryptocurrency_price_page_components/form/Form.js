@@ -19,7 +19,7 @@ function Form(){
             .then((response) => {
                 setCryptocurrencyPrice(response.data+"$");
             })
-            .catch(() => setCryptocurrencyPrice("Check if the data is entered correctly!"))
+            .catch((error) => setCryptocurrencyPrice(error.response.data))
     }
 
     return(

@@ -52,7 +52,7 @@ public class UpdatingPricesService {
                 if (watcher.getCryptocurrencies().contains(cryptocurrency)) {
                     changePercent = (cryptocurrency.getPriceUsd() - watcher.getPriceAtRegistration()) / cryptocurrency.getPriceUsd() * 100;
                     if (Math.abs(changePercent) > 1.0) {
-                        log.warn("Symbol: " + cryptocurrency.getSymbol() + " Username: " + watcher.getUsername() + " Change percent: " + changePercent + "%");
+                        log.warn("Symbol: " + cryptocurrency.getSymbol() + "; Username: " + watcher.getUsername() + "; Change percent: " + changePercent + "%.");
                     }
                 }
             }

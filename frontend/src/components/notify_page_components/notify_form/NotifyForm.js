@@ -18,9 +18,9 @@ function NotifyForm(){
                 symbol: cryptocurrencySymbol.current.value,
             })
             .then((response) => {
-                setInfo("Success!")
+                setInfo(response.data)
             })
-            .catch(() => setInfo("Check if the data is entered correctly!"));
+            .catch((error) => setInfo(error.response.data));
     }
 
     return(
