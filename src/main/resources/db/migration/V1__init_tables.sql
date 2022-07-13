@@ -11,7 +11,7 @@ create table cryptocurrency (
 create table watcher (
                       id bigserial not null,
                       price_at_registration float4,
-                      username varchar(255),
+                      username varchar(255) unique,
                       primary key (id));
 
 create table watchers_cryptocurrencies (
