@@ -1,4 +1,4 @@
-import "./CryptocurrencyPricePage.css";
+import "../common_styles/Background.css";
 
 import {Banner} from "../../components/common_components/banner/Banner";
 import {Form} from "../../components/cryptocurrency_price_page_components/form/Form";
