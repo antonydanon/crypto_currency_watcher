@@ -1,5 +1,6 @@
 package com.bsuir.crypto_currency_watcher.service;
 
+import com.bsuir.crypto_currency_watcher.exception.NonExistentCryptocurrencySymbolException;
 import com.bsuir.crypto_currency_watcher.model.Cryptocurrency;
 import com.bsuir.crypto_currency_watcher.repository.CryptocurrencyRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,10 +19,17 @@ public class CryptocurrencyService {
     }
 
     public Float getPrice(String symbol){
-        return cryptocurrencyRepository.findBySymbol(symbol).getPriceUsd();
+        if(cryptocurrencyExistsBySymbol(symbol))
+            return cryptocurrencyRepository.findBySymbol(symbol).getPriceUsd();
+        else
+            throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol " + symbol+ " do not exists!");
     }
 
     public Cryptocurrency getCryptocurrencyBySymbol(String symbol){
         return cryptocurrencyRepository.findBySymbol(symbol);
+    }
+
+    public boolean cryptocurrencyExistsBySymbol(String symbol){
+        return cryptocurrencyRepository.existsBySymbol(symbol);
     }
 }

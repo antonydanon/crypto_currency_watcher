@@ -16,7 +16,7 @@ function Form(){
                 console.log(response.data);
                 setCryptocurrencyPrice(response.data);
             })
-            .catch(() => setCryptocurrencyPrice("Error!"))
+            .catch(() => setCryptocurrencyPrice("Check if the data is entered correctly!"))
     }
 
     return(

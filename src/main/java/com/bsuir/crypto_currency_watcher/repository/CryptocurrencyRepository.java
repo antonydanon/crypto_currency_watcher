@@ -13,4 +13,6 @@ public interface CryptocurrencyRepository extends JpaRepository<Cryptocurrency, 
     @Modifying
     @Query("update Cryptocurrency c set c.priceUsd = ?1 where c.id = ?2")
     void updatePrice(float price_usd, long id);
+
+    boolean existsBySymbol(String symbol);
 }
