@@ -28,14 +28,26 @@ function NotifyForm(){
     }
 
     return(
-        <>
-            <h3>Enter your username</h3>
-            <input type="text" ref={username}/>
-            <h3>Enter the cryptocurrency symbol</h3>
-            <input type="text" ref={cryptocurrencySymbol}/>
-            <button onClick={() => notify(cryptocurrencySymbol, username)}/>
-            <div>{info}</div>
-        </>
+        <div className="notify-form">
+            <div className="notify-form-element">
+                <div>
+                    <span className="notify-form-text">Enter your username</span>
+                </div>
+                <input className="notify-form-input" type="text" ref={username}/>
+            </div>
+            <div className="notify-form-element">
+                <div>
+                    <span className="notify-form-text">Enter the cryptocurrency symbol</span>
+                </div>
+                <input className="notify-form-input" type="text" ref={cryptocurrencySymbol}/>
+            </div>
+            <div className="notify-form-element">
+                <button className="notify-form-button" onClick={() => notify(cryptocurrencySymbol, username)}>Click</button>
+            </div>
+            <div className="notify-form-element">
+                <span className="notify-result">{info}</span>
+            </div>
+        </div>
     );
 }
 
