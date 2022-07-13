@@ -7,7 +7,7 @@ function ServicesInfo(){
             <div className="services">
                 <Link className="link" to="/available-cryptocurrencies">Show available cryptocurrencies</Link>
                 <Link className="link" to="/cryptocurrency-price">Show cryptocurrency price</Link>
-                <Link className="link" to="/">Subscribe to the сryptocurrency сhange</Link>
+                <Link className="link" to="/notify">Subscribe to the сryptocurrency сhange</Link>
             </div>
         </div>
     );

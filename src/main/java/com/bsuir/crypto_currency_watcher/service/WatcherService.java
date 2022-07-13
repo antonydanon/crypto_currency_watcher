@@ -1,5 +1,6 @@
 package com.bsuir.crypto_currency_watcher.service;
 
+import com.bsuir.crypto_currency_watcher.dto.WatcherDTO;
 import com.bsuir.crypto_currency_watcher.model.Cryptocurrency;
 import com.bsuir.crypto_currency_watcher.model.Watcher;
 import com.bsuir.crypto_currency_watcher.repository.WatcherRepository;
@@ -17,8 +18,8 @@ public class WatcherService {
     private final CryptocurrencyService cryptocurrencyService;
     private final WatcherRepository watcherRepository;
 
-    public Watcher notify(String username, String symbol){
-        Watcher watcher = createWatcher(username, cryptocurrencyService.getCryptocurrencyBySymbol(symbol));
+    public Watcher notify(WatcherDTO watcherDTO){
+        Watcher watcher = createWatcher(watcherDTO.getUsername(), cryptocurrencyService.getCryptocurrencyBySymbol(watcherDTO.getSymbol()));
         return watcherRepository.save(watcher);
     }
 
