@@ -20,15 +20,19 @@ function AvailableCryptocurrencies(){
 
     return(
         <>
-            <div className="available-cryptocurrencies-header">
-                <h1>Available cryptocurrencies</h1>
-            </div>
             <div className="available-cryptocurrencies-list">
-                    {listOfAvailableCryptocurrencies.map((availableCryptocurrency) => (
-                            <div className="author">
-                                {availableCryptocurrency.id} {availableCryptocurrency.symbol} {availableCryptocurrency.priceUsd}
-                            </div>
-                        ))}
+                <div className="available-cryptocurrency">
+                    <div className="item">ID</div>
+                    <div className="item">Symbol</div>
+                    <div className="item">Price USD</div>
+                </div>
+                {listOfAvailableCryptocurrencies.map((availableCryptocurrency) => (
+                    <div className="available-cryptocurrency">
+                        <div className="item">{availableCryptocurrency.id}</div>
+                        <div className="item">{availableCryptocurrency.symbol}</div>
+                        <div className="item">{availableCryptocurrency.priceUsd}$</div>
+                    </div>
+                ))}
             </div>
         </>
     );
