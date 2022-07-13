@@ -5,17 +5,13 @@ import { useNavigate } from 'react-router';
 
 function NotifyForm(){
 
-    const navigate = useNavigate();
+    const[info, setInfo] = React.useState("");
     let cryptocurrencySymbol = React.createRef();
     let username = React.createRef();
-
-    const[info, setInfo] = React.useState("");
 
     const API_URL  = "http://localhost:8080/watchers/notify";
 
     const notify = (cryptocurrencySymbol, username) => {
-        console.log("hello! " + username + "   " + cryptocurrencySymbol);
-
         axios
             .post(API_URL, {
                 username: username.current.value,
@@ -24,7 +20,7 @@ function NotifyForm(){
             .then((response) => {
                 setInfo("Success!")
             })
-            .catch((error) => setInfo("Check if the data is entered correctly!"));
+            .catch(() => setInfo("Check if the data is entered correctly!"));
     }
 
     return(

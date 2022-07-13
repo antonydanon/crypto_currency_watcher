@@ -13,7 +13,6 @@ function Form(){
     const getCryptocurrencyPrice = () => {
         axios.get(API_URL + cryptocurrencySymbol.current.value)
             .then((response) => {
-                console.log(response.data);
                 setCryptocurrencyPrice(response.data+"$");
             })
             .catch(() => setCryptocurrencyPrice("Check if the data is entered correctly!"))

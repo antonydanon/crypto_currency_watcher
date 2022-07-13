@@ -11,7 +11,6 @@ function AvailableCryptocurrencies(){
     React.useEffect((() => {
         axios.get(API_URL)
             .then((response) => {
-                console.log(response.data);
                 setListOfAvailableCryptocurrencies(response.data);
             })
             .catch(() => setListOfAvailableCryptocurrencies([]))

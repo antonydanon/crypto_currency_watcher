@@ -5,8 +5,6 @@ import {AvailableCryptocurrenciesPage} from "./pages/available_cryptocurrencies_
 import {CryptocurrencyPricePage} from "./pages/cryptocurrency_price_page/CryptocurrencyPricePage";
 import {NotifyPage} from "./pages/notify_page/NotifyPage";
 
-
-
 function App() {
     return (
         <>
