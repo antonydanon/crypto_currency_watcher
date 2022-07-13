@@ -21,7 +21,7 @@ public class CryptocurrencyService {
         if(cryptocurrencyExistsBySymbol(symbol))
             return getCryptocurrencyBySymbol(symbol).getPriceUsd();
         else
-            throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol " + symbol + " do not exists!");
+            throw new NonExistentCryptocurrencySymbolException(symbol);
     }
 
     public Cryptocurrency getCryptocurrencyBySymbol(String symbol){

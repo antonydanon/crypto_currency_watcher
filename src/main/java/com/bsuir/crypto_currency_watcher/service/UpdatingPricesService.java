@@ -5,8 +5,7 @@ import com.bsuir.crypto_currency_watcher.model.Cryptocurrency;
 import com.bsuir.crypto_currency_watcher.model.Watcher;
 import com.bsuir.crypto_currency_watcher.repository.CryptocurrencyRepository;
 import lombok.AllArgsConstructor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -18,13 +17,12 @@ import java.util.Objects;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UpdatingPricesService {
 
     private final WatcherService watcherService;
     private final CryptocurrencyService cryptocurrencyService;
     private final CryptocurrencyRepository cryptocurrencyRepository;
-
-    static final Logger log = LoggerFactory.getLogger(UpdatingPricesService.class);
 
     private static final String API_URL = "https://api.coinlore.net/api/ticker/?id=";
     private static final long[] ID_OF_CRYPTOCURRENCY = {90, 80, 48543};
@@ -39,7 +37,7 @@ public class UpdatingPricesService {
         RestTemplate restTemplate = new RestTemplate();
         ResponseEntity<CryptocurrencyDTO[]> response;
 
-        for (int i = 0; i < COUNT_OF_AVAILABLE_CRYPTOCURRENCIES; i ++){
+        for (byte i = 0; i < COUNT_OF_AVAILABLE_CRYPTOCURRENCIES; i ++){
             response = restTemplate.getForEntity(API_URL + ID_OF_CRYPTOCURRENCY[i], CryptocurrencyDTO[].class);
             cryptocurrencyRepository.updatePrice(Objects.requireNonNull(response.getBody())[0].getPrice_usd(), ID_OF_CRYPTOCURRENCY[i]);
         }
@@ -54,12 +52,16 @@ public class UpdatingPricesService {
         for (Watcher watcher : watchers) {
             for (Cryptocurrency cryptocurrency : cryptocurrencies) {
                 if (watcher.getCryptocurrencies().contains(cryptocurrency)) {
-                    changePercent = (cryptocurrency.getPriceUsd() - watcher.getPriceAtRegistration()) / watcher.getPriceAtRegistration() * ONE_HUNDRED_PERCENT;
+                    changePercent = calculatePercentageChange(cryptocurrency.getPriceUsd(), watcher.getPriceAtRegistration());
                     if (Math.abs(changePercent) > ONE_PERCENT) {
                         log.warn("Symbol: " + cryptocurrency.getSymbol() + "; Username: " + watcher.getUsername() + "; Change percent: " + changePercent + "%.");
                     }
                 }
             }
         }
+    }
+
+    private float calculatePercentageChange(float newPriceValue, float oldPriceValue){
+        return (newPriceValue - oldPriceValue) / oldPriceValue * ONE_HUNDRED_PERCENT;
     }
 }

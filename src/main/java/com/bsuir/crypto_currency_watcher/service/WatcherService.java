@@ -8,8 +8,6 @@ import com.bsuir.crypto_currency_watcher.model.Watcher;
 import com.bsuir.crypto_currency_watcher.repository.WatcherRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,21 +21,19 @@ public class WatcherService {
     public Watcher notify(WatcherDTO watcherDTO){
         if(!watcherRepository.existsByUsername(watcherDTO.getUsername())){
             if(cryptocurrencyService.cryptocurrencyExistsBySymbol(watcherDTO.getSymbol())) {
-                Watcher watcher = createWatcher(watcherDTO.getUsername(), cryptocurrencyService.getCryptocurrencyBySymbol(watcherDTO.getSymbol()));
+                Watcher watcher = createWatcher(watcherDTO, cryptocurrencyService.getCryptocurrencyBySymbol(watcherDTO.getSymbol()));
                 return watcherRepository.save(watcher);
             } else
-                throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol " + watcherDTO.getSymbol() + " do not exists!");
+                throw new NonExistentCryptocurrencySymbolException(watcherDTO.getSymbol());
         } else
-            throw new WatcherAlreadyExistsException("User with username " + watcherDTO.getUsername() + " already exists!");
+            throw new WatcherAlreadyExistsException(watcherDTO.getUsername());
     }
 
-    private Watcher createWatcher(String username, Cryptocurrency cryptocurrency){
-        Set<Cryptocurrency> cryptocurrencies = new HashSet<>();
-        cryptocurrencies.add(cryptocurrency);
+    private Watcher createWatcher(WatcherDTO watcherDTO, Cryptocurrency cryptocurrency){
         return Watcher.builder()
-                .username(username)
+                .username(watcherDTO.getUsername())
                 .priceAtRegistration(cryptocurrency.getPriceUsd())
-                .cryptocurrencies(cryptocurrencies)
+                .cryptocurrencies(Set.of(cryptocurrency))
                 .build();
     }
 
