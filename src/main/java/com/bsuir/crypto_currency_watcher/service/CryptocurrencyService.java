@@ -5,7 +5,6 @@ import com.bsuir.crypto_currency_watcher.model.Cryptocurrency;
 import com.bsuir.crypto_currency_watcher.repository.CryptocurrencyRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
@@ -20,9 +19,9 @@ public class CryptocurrencyService {
 
     public Float getCryptocurrencyPrice(String symbol){
         if(cryptocurrencyExistsBySymbol(symbol))
-            return cryptocurrencyRepository.findBySymbol(symbol).getPriceUsd();
+            return getCryptocurrencyBySymbol(symbol).getPriceUsd();
         else
-            throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol  " + symbol+ "  do not exists!");
+            throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol " + symbol + " do not exists!");
     }
 
     public Cryptocurrency getCryptocurrencyBySymbol(String symbol){

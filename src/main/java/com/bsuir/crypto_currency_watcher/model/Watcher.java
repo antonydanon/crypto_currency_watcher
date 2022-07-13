@@ -2,7 +2,6 @@ package com.bsuir.crypto_currency_watcher.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
-
 import javax.persistence.*;
 import java.util.Set;
 

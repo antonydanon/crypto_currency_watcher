@@ -26,9 +26,9 @@ public class WatcherService {
                 Watcher watcher = createWatcher(watcherDTO.getUsername(), cryptocurrencyService.getCryptocurrencyBySymbol(watcherDTO.getSymbol()));
                 return watcherRepository.save(watcher);
             } else
-                throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol  " + watcherDTO.getSymbol() + "  do not exists!");
+                throw new NonExistentCryptocurrencySymbolException("Cryptocurrencies with the symbol " + watcherDTO.getSymbol() + " do not exists!");
         } else
-            throw new WatcherAlreadyExistsException("User with username  " + watcherDTO.getUsername() + "  already exists!");
+            throw new WatcherAlreadyExistsException("User with username " + watcherDTO.getUsername() + " already exists!");
     }
 
     private Watcher createWatcher(String username, Cryptocurrency cryptocurrency){
